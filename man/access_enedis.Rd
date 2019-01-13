@@ -4,17 +4,18 @@
 \alias{access_enedis}
 \title{access_enedis}
 \usage{
-access_enedis(enedis_url = paste("https://espace-client-connexion.enedis.fr",
-  "auth/UI/Login", sep = "/"), realm = "particuliers",
-  goto = paste("https://espace-client-particuliers.enedis.fr",
-  "group/espace-particuliers/accueil", sep = "/"))
+access_enedis(url, realm = "particuliers", goto)
 }
 \arguments{
-\item{enedis_url}{defaults to "https://espace-client-connexion.enedis.fr/auth/UI/Login"}
+\item{url}{Enedis URL for login
+It defaults to \url{"https://espace-client-connexion.enedis.fr/auth/UI/Login"}
+but other values may be useful for unit tests}
 
-\item{realm}{defaults to "particuliers"}
+\item{realm}{passed as a query to enedis website. 
+Only tested with "particuliers"}
 
-\item{goto}{defaults to "https://espace-client-particuliers.enedis.fr/group/espace-particuliers/accueil"}
+\item{goto}{passed as a query to enedis website. 
+Usually \url{"https://espace-client-particuliers.enedis.fr/group/espace-particuliers/accueil"}}
 }
 \value{
 the result of httr::GET query
@@ -27,4 +28,7 @@ Accède au site d'Enedis et vérifie qu'on peut l'atteindre.
 }
 \examples{
 access_enedis()
+}
+\seealso{
+\code{\link{connect_enedis}}, \code{\link{disconnect_enedis}}
 }

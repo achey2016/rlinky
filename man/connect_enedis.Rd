@@ -4,15 +4,11 @@
 \alias{connect_enedis}
 \title{connect_enedis}
 \usage{
-
-  connect_enedis(enedis_url = paste("https://espace-client-connexion.enedis.fr",
-  "auth/UI/Login", sep = "/"), realm = "particuliers",
-  goto = paste("https://espace-client-particuliers.enedis.fr",
-  "group/espace-particuliers/accueil", sep = "/"),
-  secretfile = ".secret_enedis_json")
+connect_enedis(url, realm = "particuliers", goto,
+  secretfile = "~/.secret_enedis_json")
 }
 \arguments{
-\item{enedis_url}{defaults to "https://espace-client-connexion.enedis.fr/auth/UI/Login"}
+\item{url}{defaults to "https://espace-client-connexion.enedis.fr/auth/UI/Login"}
 
 \item{realm}{defaults to "particuliers"}
 
@@ -25,13 +21,21 @@ the result of httr::GET or httr::POST query
 }
 \description{
 Connection au site d'enedis. Cette fonction suppose au prealable d'avoir cree
-un fichier "secretfile" au format json qui contient ses identifiants. Ce fichier
-peut contenir quelque chose comme:
-{
-  "IDToken1": ["mon.mail@pour.enedis"],
-  "IDToken2": ["mon.mot.de.passe.pour.enedis"]
+un fichier "secretfile" au format json qui contient ses identifiants.
+}
+\details{
+Le fichier secretfile peut contenir quelque chose comme:
+
+\preformatted{
+\{   
+  "IDToken1": ["mon.mail@connu.d.enedis"],   
+  "IDToken2": ["mon.mot.de.passe.pour.enedis"]   
+\}   
 }
 }
 \examples{
 connect_enedis(secretfile = "~/.secret_enedis_json")
+}
+\seealso{
+\code{\link{disconnect_enedis}}
 }

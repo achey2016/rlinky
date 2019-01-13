@@ -2,9 +2,11 @@
 
 export(access_enedis)
 export(connect_enedis)
+export(disconnect_enedis)
 importFrom(httr,GET)
 importFrom(httr,POST)
 importFrom(httr,content)
+importFrom(httr,handle_find)
 importFrom(httr,http_status)
 importFrom(httr,status_code)
 importFrom(jsonlite,fromJSON)
