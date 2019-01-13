@@ -1,0 +1,19 @@
+Package: rlinky
+Type: Package
+Title: R Linky data fetcher
+Version: 0.1.0
+Author: Anne Cheylus
+Maintainer: Anne Cheylus <anne.cheylus@gmail.com>
+Description: This R package allows fetching linky data from enedis website. 
+  Cette bibliothèque en R permet de récupérer les données de votre compteur linky à partir du site de enedis. 
+  Pour cela, il faut déjà avoir un compte chez enedis, et un compteur linky.
+License: file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    httr,
+    jsonlite,
+    xml2
+Authors@R: person("Anne", "Cheylus", email = "anne.cheylus@gmail.com",
+    role = c("aut", "cre"))
+RoxygenNote: 6.0.1
