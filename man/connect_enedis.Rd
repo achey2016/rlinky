@@ -20,11 +20,13 @@ connect_enedis(url, realm = "particuliers", goto,
 the result of httr::GET or httr::POST query
 }
 \description{
+Connects to Enedis website. This function searches identifier and password in a "secretfile" in json format.
 Connection au site d'enedis. Cette fonction suppose au prealable d'avoir cree
 un fichier "secretfile" au format json qui contient ses identifiants.
 }
 \details{
-Le fichier secretfile peut contenir quelque chose comme:
+The secretfile should look like:
+Le fichier secretfile peut contenir quelque chose comme :
 
 \preformatted{
 \{   

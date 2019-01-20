@@ -31,14 +31,14 @@ access_enedis <- function(url,
   if (missing(goto)) {
     goto <- rlinky::enedis_accueil;
   }
-  # Page accueil Enedis
+  # Get Enedis Home Page
   r2 <- GET(url = url,
             query = list(realm = realm,
                          goto = goto))
-  # Cette requete devrait aboutir a un statut 200 (HTTP_OK) ou au moins < 300
+  # The status code should be 200 (HTTP_OK) or at least < 300
   if (status_code(r2) >= 300) {
     stop(paste(url,
-               "indique une erreur HTTP",
+               "reports HTTP error",
                status_code(r2),
                " : ",
                http_status(r2)$message,
@@ -49,10 +49,12 @@ access_enedis <- function(url,
 
 #' connect_enedis
 #' 
+#' Connects to Enedis website. This function searches identifier and password in a "secretfile" in json format.
 #' Connection au site d'enedis. Cette fonction suppose au prealable d'avoir cree
 #' un fichier "secretfile" au format json qui contient ses identifiants. 
 #' 
-#' Le fichier secretfile peut contenir quelque chose comme:
+#' The secretfile should look like:
+#' Le fichier secretfile peut contenir quelque chose comme :
 #' 
 #' \preformatted{
 #' \{   
@@ -90,38 +92,33 @@ connect_enedis <- function(url,
   if (missing(goto)) {
     goto <- rlinky::enedis_accueil;
   }
-  # 1) Lire le contenu de la page d'enedis
+  # 1) Read Enedis home page
   r2 <- access_enedis(url, realm, goto)
-  # 2) si je suis encore connecte inutile de faire l'etape login
+  # 2) If we are still connected, skip the login steps
   if (!grepl("MODE CONNECTE", content(r2, "text"))) {
-    # 3) Recup infos formulaire login
-    login_form2 <- xml_find_all(content(r2), ".//form")
-    login_form2 <- login_form2[which(xml_attr(login_form2, "name") == "Login")]
+    # 3) Fetch login form content
+    login_form2 <- xml_find_all(content(r2), ".//form[@name='Login']")
     if (length(login_form2) != 1) {
-      stop("Absence de formulaire Login sur cette page")
+      stop("No login form found")
     }
-    # 4) Dans ce formulaire on veut les input
-    input2 <- xml_find_all(login_form2, ".//input")
-    # Supprimer le bouton submit
-    if (any(xml_attr(input2, "type") == "submit")) {
-      input2 <- input2[-which(xml_attr(input2, "type") == "submit")]
-    }
-    # 5) Placer les valeurs de ces input dans une liste
+    # 4) Take all input fields in this form but the submit button
+    input2 <- xml_find_all(login_form2, ".//input[@type!='submit']")
+    # 5) Save input values in a list
     list2 <- as.list(xml_attr(input2, "value"))
     names(list2) <- xml_attr(input2, "name")
 
-    # 6) Recuperer mes identifiants pour me connecter sur le site d'enedis
+    # 6) Read the secretfile to fill identifier and password
     infos_connect <- fromJSON(file(secretfile))
     list2$IDToken1 <- infos_connect$IDToken1
     list2$IDToken2 <- infos_connect$IDToken2
 
-    # 7) Poster ces information pour me connecter
+    # 7) Post the filled in form to connect
     r3 <- POST(url = url,
                body = list2,
                encode = "form")
     stopifnot(grepl("Suivre ma consommation", content(r3, "text")))
   } else {
-    cat("Reprise de la connection en cours\n")
+    message("Already connected\n")
     r3 <- r2;
   }
   return(r3)
