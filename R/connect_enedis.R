@@ -85,7 +85,6 @@ connect_enedis <- function(url,
   realm = "particuliers",
   goto,
   secretfile = "~/.secret_enedis_json") {
-  
   if (missing(url)) {
     url <- rlinky::enedis_url;
   }

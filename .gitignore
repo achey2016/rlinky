@@ -38,3 +38,6 @@ rsconnect/
 
 # enedis credentials should not accidentally end published on the web
 .secret_enedis_json
+
+# other temporary files
+R-rlinky.fr.po~
