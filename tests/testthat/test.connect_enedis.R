@@ -16,7 +16,7 @@ test_that("connect_enedis returns a response", {
   expect_that(connect_enedis(), is_a("response"))
 })
 
-test_that("connect_enedis returns the content of a specially crafted temporary file", {
+test_that("connect_enedis returns the content of a specially crafted file", {
   testfile <- tempfile()
   testcontent <- "<html><body>MODE CONNECTE</body></html>"
   cat(testcontent, file = testfile)

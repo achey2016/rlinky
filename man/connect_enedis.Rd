@@ -37,7 +37,10 @@ Le fichier secretfile peut contenir quelque chose comme :
 }
 \examples{
 connect_enedis(secretfile = "~/.secret_enedis_json")
+disconnect_enedis()
 }
 \seealso{
 \code{\link{disconnect_enedis}}
+
+\code{\link{query_daily_month}}
 }

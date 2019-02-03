@@ -17,9 +17,15 @@ an updated form query
 \description{
 Alter the start and end date for a daily 1-month query
 }
+\details{
+Change les dates de début et de fin pour une requête sur un mois de 
+relevés quotidiens
+}
 \examples{
 change_dates()
 }
 \seealso{
 \code{\link{daily_month}}
+
+\code{\link{query_daily_month}}
 }

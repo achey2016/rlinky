@@ -18,6 +18,7 @@ the result of httr::GET query
 Disconnect from enedis website
 }
 \examples{
+connect_enedis()
 disconnect_enedis()
 }
 \seealso{

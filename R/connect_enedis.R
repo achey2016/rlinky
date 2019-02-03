@@ -78,9 +78,11 @@ access_enedis <- function(url,
 #' 
 #' @export
 #' @seealso \code{\link{disconnect_enedis}}
+#' @seealso \code{\link{query_daily_month}}
 #' 
 #' @examples
 #' connect_enedis(secretfile = "~/.secret_enedis_json")
+#' disconnect_enedis()
 connect_enedis <- function(url,
   realm = "particuliers",
   goto,
@@ -115,7 +117,9 @@ connect_enedis <- function(url,
     r3 <- POST(url = url,
                body = list2,
                encode = "form")
-    stopifnot(grepl("Suivre ma consommation", content(r3, "text")))
+    if (!grepl("Suivre ma consommation", content(r3, "text"))) {
+      warning("Unexpected connection failure")
+    }
   } else {
     message("Already connected\n")
     r3 <- r2;
@@ -136,6 +140,7 @@ connect_enedis <- function(url,
 #' @export
 #' @seealso \code{\link{connect_enedis}}
 #' @examples
+#' connect_enedis()
 #' disconnect_enedis()
 disconnect_enedis <- function(url, url_logout) {
   if (missing(url)) {
