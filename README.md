@@ -30,7 +30,7 @@ plot(Horodate, kWh, type="b", pch=16,
      xlab = "Date", ylab = "power consumption (kWh)")
 ```
 
-![](power20190201.png)
+![](man/figures/power20190201.png)
 
 
 ### Secretfile format - Format du fichier .secret_enedis_json
