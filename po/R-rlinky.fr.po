@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: rlinky 0.1.0\n"
-"POT-Creation-Date: 2019-01-21 00:21\n"
+"POT-Creation-Date: 2019-02-03 15:32\n"
 "PO-Revision-Date: 2019-01-21 00:13\n"
 "Last-Translator: Anne Cheylus <anne.cheylus@gmail.com>\n"
 "Language-Team: \n"
@@ -19,5 +19,17 @@ msgstr ":"
 msgid "No login form found"
 msgstr "Aucun formulaire de connection n'a été trouvé"
 
+msgid "Unexpected connection failure"
+msgstr "Erreur de connexion inattendue"
+
 msgid "Already connected"
 msgstr "Reprise de la connexion en cours"
+
+msgid "Could not find a unique field with _dateDebut"
+msgstr "Pas de champ unique avec _dateDebut"
+
+msgid "Could not find a unique field with _dateFin"
+msgstr "Pas de champ unique avec _dateFin"
+
+msgid "Session expired"
+msgstr "Session expirée"
