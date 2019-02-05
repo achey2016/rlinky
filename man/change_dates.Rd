@@ -4,28 +4,36 @@
 \alias{change_dates}
 \title{change_dates}
 \usage{
-change_dates(form_query, end_date)
+change_dates(form_query, end_date, start_date, by_period)
 }
 \arguments{
-\item{form_query}{a list with url, query and input like daily_month}
+\item{form_query}{a list with url, query and input like daily_month or hourly_day}
 
-\item{end_date}{the end date for the 1-month query in Date format}
+\item{end_date}{the end date}
+
+\item{start_date}{the start date}
+
+\item{by_period}{a negative time interval to compute start_date from end_date. 
+Ignored if start_date is provided. Passed as \code{by} argument to \code{\link{seq.POSIXt}}}
 }
 \value{
 an updated form query
 }
 \description{
-Alter the start and end date for a daily 1-month query
+Alter the start and end date for a enedis data query
 }
 \details{
-Change les dates de début et de fin pour une requête sur un mois de 
-relevés quotidiens
+Change les dates de début et de fin pour une requête afin d'obtenir des
+relevés
 }
 \examples{
-change_dates()
+myquery <- change_dates(daily_month, by_period = "-2 months")
+myquery <- change_dates(hourly_day, by_period = "-10 days")
 }
 \seealso{
 \code{\link{daily_month}}
+
+\code{\link{hourly_day}}
 
 \code{\link{query_daily_month}}
 }

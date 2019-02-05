@@ -1,21 +1,26 @@
 #' change_dates
 #' 
-#' Alter the start and end date for a daily 1-month query
+#' Alter the start and end date for a enedis data query
 #'
-#' Change les dates de début et de fin pour une requête sur un mois de 
-#' relevés quotidiens
+#' Change les dates de début et de fin pour une requête afin d'obtenir des
+#' relevés 
 #'
-#' @param form_query a list with url, query and input like daily_month
-#' @param end_date the end date for the 1-month query in Date format
+#' @param form_query a list with url, query and input like daily_month or hourly_day
+#' @param end_date the end date 
+#' @param start_date the start date
+#' @param by_period a negative time interval to compute start_date from end_date. 
+#' Ignored if start_date is provided. Passed as \code{by} argument to \code{\link{seq.POSIXt}}
 #'
 #' @return an updated form query
 #' @export
 #'
 #' @examples
-#' change_dates()
+#' myquery <- change_dates(daily_month, by_period = "-2 months")
+#' myquery <- change_dates(hourly_day, by_period = "-10 days")
 #' @seealso \code{\link{daily_month}}
+#' @seealso \code{\link{hourly_day}}
 #' @seealso \code{\link{query_daily_month}}
-change_dates <- function(form_query, end_date) {
+change_dates <- function(form_query, end_date, start_date, by_period) {
   # initial values for missing parameters
   if (missing(form_query)) {
     form_query <- rlinky::daily_month
@@ -23,10 +28,15 @@ change_dates <- function(form_query, end_date) {
   if (missing(end_date)) {
     end_date <- Sys.Date()
   }
-  # start date should be one month before end date
-  start_date <- seq(from = end_date,
-                   by = "-1 month",
-                   length.out = 2)[2]
+  if (missing(by_period)) {
+    by_period <- "-1 month"
+  }
+  if (missing(start_date)) {
+    # start date should be by_period before end date
+    start_date <- seq(from = end_date,
+                      by = by_period,
+                      length.out = 2)[2]
+  }
   # Find where to change form query content: start date ends with _dateDebut
   num_start_date <- grep("_dateDebut$", names(form_query$input))
   if (length(num_start_date) != 1) {

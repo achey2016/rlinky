@@ -62,3 +62,31 @@
 #' }
 #' @seealso \code{\link{change_dates}}
 "daily_month"
+#' Hourly day
+#' 
+#' Sample content of a form to get half-hourly data for one day
+#'
+#' @format A list with 3 elements
+#' \describe{
+#'   \item{url}{url that will receive the POST command: 
+#'   
+#'   https://espace-client-particuliers.enedis.fr/group/espace-particuliers/suivi-de-consommation}
+#'   \item{query}{A list of query parameters for the POST command, like:
+#'   \tabular{ll}{
+#'   p_p_id: \tab "lincspartdisplaycdc_WAR_lincspartcdcportlet", \cr
+#'   p_p_lifecycle: \tab 2, \cr
+#'   p_p_state: \tab "normal", \cr
+#'   p_p_mode: \tab "view", \cr
+#'   p_p_resource_id: \tab "urlCdcHeure", \cr
+#'   p_p_cacheability: \tab "cacheLevelPage", \cr
+#'   p_p_col_id: \tab "column-1", \cr
+#'   p_p_col_count: \tab 2}}
+#'   \item{input}{A list of input parameters for the POST command, useful to change the 
+#'   start and end of the month requested, like
+#'   \tabular{ll}{
+#'   _lincspartdisplaycdc_WAR_lincspartcdcportlet_dateDebut: \tab "31/01/2019", \cr
+#'   _lincspartdisplaycdc_WAR_lincspartcdcportlet_dateFin: \tab "03/02/2019"
+#'   }}
+#' }
+#' @seealso \code{\link{change_dates}}
+"hourly_day"

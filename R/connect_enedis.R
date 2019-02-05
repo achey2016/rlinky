@@ -96,7 +96,7 @@ connect_enedis <- function(url,
   # 1) Read Enedis home page
   r2 <- access_enedis(url, realm, goto)
   # 2) If we are still connected, skip the login steps
-  if (!grepl("MODE CONNECTE", content(r2, "text"))) {
+  if (!grepl("MODE CONNECTE", content(r2, "text", "text"))) {
     # 3) Fetch login form content
     login_form2 <- xml_find_all(content(r2), ".//form[@name='Login']")
     if (length(login_form2) != 1) {
